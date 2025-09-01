@@ -1,9 +1,12 @@
 pipeline {
   agent any
+  environment {
+    GIT_SSH_COMMAND = 'ssh -o StrictHostKeyChecking=no'
+  }
   stages {
     stage('Clone Repo') {
       steps {
-        git 'https://github.com/your-username/simple-html-app.git'
+        git url: 'git@github.com:abhilash07-10/simple-html-app.git', credentialsId: 'github-ssh'
       }
     }
     stage('Build Docker Image') {
@@ -18,3 +21,4 @@ pipeline {
     }
   }
 }
+
